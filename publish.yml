@@ -87,7 +87,7 @@ jobs:
       - ${{ each library in parameters.libraries }}:
         - script: sudo apt-get install -y ${{ library }}
           displayName: Installing ${{ library }} with apt
-      - script: 'python -m pip install -U --user --force-reinstall build setuptools_scm'
+      - script: 'python -m pip install -U --user --force-reinstall build setuptools_scm flit'
         displayName: "Install build tools"
       - ${{ if parameters.remove_local_scheme }}:
           - bash: echo "##vso[task.setvariable variable=SETUPTOOLS_SCM_PRETEND_VERSION]$(python setup.py --version | cut -d '+' -f 1)"
@@ -119,7 +119,7 @@ jobs:
         fetchDepth: 999999999
       - task: UsePythonVersion@0
         displayName: Install Python
-      - script: 'python -m pip install -U --user --force-reinstall build setuptools_scm'
+      - script: 'python -m pip install -U --user --force-reinstall build setuptools_scm flit'
         displayName: "Install build tools"
       - ${{ if parameters.remove_local_scheme }}:
           - bash: echo "##vso[task.setvariable variable=SETUPTOOLS_SCM_PRETEND_VERSION]$(python setup.py --version | cut -d '+' -f 1)"
